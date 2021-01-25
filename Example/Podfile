@@ -1,0 +1,13 @@
+use_frameworks!
+
+platform :ios, '9.0'
+
+target 'RZPayManager_Example' do
+  pod 'RZPayManager', :path => '../'
+
+  target 'RZPayManager_Tests' do
+    inherit! :search_paths
+
+    
+  end
+end
