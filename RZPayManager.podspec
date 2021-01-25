@@ -1,7 +1,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'RZPayManager'
-  s.version          = '0.1.0'
+  s.version          = '0.1.1'
   s.summary          = 'A short description of RZPayManager.'
 
   s.description      = <<-DESC
@@ -15,10 +15,11 @@ TODO: Add long description of the pod here.
   s.source           = { :git => 'https://github.com/ReyZhang/RZPayManager.git', :tag => s.version.to_s }
 
   s.ios.deployment_target = '9.0'
-
+  s.pod_target_xcconfig = { 'VALID_ARCHS' => 'x86_64 armv7 armv7s arm64' }
   s.source_files = 'RZPayManager/Classes/**/*'
-  
+  s.frameworks = "Foundation", "UIKit"
   s.dependency 'AlipaySDK-iOS', '~> 15.7.4'
+  
   s.static_framework = true
   s.vendored_libraries = 'RZPayManager/Classes/WeChatSDKFull/*.a'
 end
