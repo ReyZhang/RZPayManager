@@ -7,12 +7,29 @@
 //
 
 #import "RZAppDelegate.h"
+#import <RZPayManager.h>
+
 
 @implementation RZAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    // Override point for customization after application launch.
+    
+    //1. 设置URL Scheme，用于支付完成后的回调
+    PayConfig *config = [PayConfig config];
+    config.appScheme = @"your scheme";
+    
+    //2. 注册支付平台
+    [PayConfig registPlatforms:^(PaySDKRegister * _Nonnull platformsRegister) {
+        
+        //注册微信支付
+        [platformsRegister setupWeChatWithAppId:@"" appSecret:@"" universalLink:@""];
+        
+        
+    }];
+    
+    
+    
     return YES;
 }
 

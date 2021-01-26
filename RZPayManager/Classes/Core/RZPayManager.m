@@ -113,12 +113,13 @@ NSString *kNotification_Alipay_CallBack = @"Notification_Alipay_CallBack";
 
 #pragma mark -===============Alipay===================-
 - (void)doAlipay {
-//    [[AlipaySDK defaultService]
-//     payOrder:self->prepareData
-//     fromScheme:kAppScheme
-//     callback:^(NSDictionary *resultDic) {
-//                    [self handerAlipayResult:resultDic];
-//                }];
+    NSAssert(![[PayConfig config].appScheme isNull], @"未配置应用URL Scheme");
+    [[AlipaySDK defaultService]
+     payOrder:self->prepareData
+     fromScheme:[PayConfig config].appScheme
+     callback:^(NSDictionary *resultDic) {
+                    [self handerAlipayResult:resultDic];
+                }];
 }
 
 

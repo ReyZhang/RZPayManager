@@ -25,6 +25,15 @@
     return _instance;
 }
 
+
+/*!
+ 支付平台原有API注册
+ */
++ (void)registPlatforms:(RegisterBlock)block {
+    PaySDKRegister *sdkRegister = [[PaySDKRegister alloc] init];
+    block(sdkRegister);
+}
+
 //添加获取预支付信息对应的策略类， 没有传递实例对象，避免未使用而造成的内存浪费
 - (void)appendPrepayDataStrategy:(Class)strategyClass
                      withPayType:(RZPayType)payType {
