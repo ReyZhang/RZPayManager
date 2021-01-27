@@ -1,20 +1,20 @@
 # RZPayManager
 
 
-##介绍
+## 介绍
 RZPayManager是对时下各第三方支付平台的整合，将支付的调用简单化，组件化。
 目前支持的第三方支付平台有：
 1. 微信支付
 2. 支付宝支付
 
 
-##安装
+## 安装
 可以通过cocopods来安装，将如下代码加入到你的Podfile文件中
 ```
 pod 'RZPayManager'
 ```
 
-##使用
+## 使用
 
 ```
 //1. 设置URL Scheme，用于支付完成后的回调
@@ -115,7 +115,7 @@ self.payManager.requestParams = @{@"orderId":self.model.orderId,@"payAmount":@"0
 RZPayManager对象在使用时，要声明为局部变量或用属性， 不然对象可能会因为被提前释放而接收不到支付回调
 
 
-##处理支付回调
+## 处理支付回调
 支付组件在成功或失败后会回调url来返回支付结果， 在AppDelegate的代理方法中拦截并处理
 
 ```
