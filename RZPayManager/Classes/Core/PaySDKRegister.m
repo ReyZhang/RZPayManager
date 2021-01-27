@@ -6,7 +6,7 @@
 //
 
 #import "PaySDKRegister.h"
-#import <WXApi.h>
+#import "WXApi.h"
 
 @implementation PaySDKRegister
 

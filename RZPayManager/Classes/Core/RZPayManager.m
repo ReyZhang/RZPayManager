@@ -7,8 +7,11 @@
 
 #import "RZPayManager.h"
 #import "WXPayService.h"
+#import <UPPaymentControl.h>
 
-NSString *kNotification_Alipay_CallBack = @"Notification_Alipay_CallBack";
+NSString *ALIPAY_CALLBACK_NOTIFICATION = @"Notification_Alipay_CallBack";
+NSString *UPPAY_CALLBACK_NOTIFICATION = @"Notification_UPPay_CallBack";
+
 
 @implementation RZPayManager {
     id prepareData;
@@ -37,7 +40,8 @@ NSString *kNotification_Alipay_CallBack = @"Notification_Alipay_CallBack";
 
 
 - (void)commonInit {
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(alipayCallBackHandler:) name:kNotification_Alipay_CallBack object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(alipayCallBackHandler:) name:ALIPAY_CALLBACK_NOTIFICATION object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(uppayCallBackHandler:) name:UPPAY_CALLBACK_NOTIFICATION object:nil];
 }
 
 //开始支付
@@ -58,9 +62,10 @@ NSString *kNotification_Alipay_CallBack = @"Notification_Alipay_CallBack";
             if (!error) {
                 id data = result[@"data"];
                 if ([data isKindOfClass:[NSString class]]) {
-                    if (self.payType == PayTypeForAlipay) {
+                    if (self.payType == PayTypeForAlipay ||
+                        self.payType == PayTypeForUPPay) {
                         self->prepareData  = [NSString stringWithFormat:@"%@",data];
-                    }else {
+                    }else if (self.payType == PayTypeForWXPay){
                         NSString *jsonStr = [NSString stringWithFormat:@"%@",data];
                         self->prepareData = [jsonStr jsonValueDecoded];
                     }
@@ -81,34 +86,18 @@ NSString *kNotification_Alipay_CallBack = @"Notification_Alipay_CallBack";
     }
 }
 
-/** 需要传预支付请求返回数据 */
-- (void)startPayData:(id)result {
-    id data = result[@"data"];
-    if ([data isKindOfClass:[NSString class]]) {
-        if (self.payType == PayTypeForAlipay) {
-            self->prepareData  = [NSString stringWithFormat:@"%@",data];
-        }else {
-            NSString *jsonStr = [NSString stringWithFormat:@"%@",data];
-            self->prepareData = [jsonStr jsonValueDecoded];
-        }
-    }else if ([data isKindOfClass:[NSDictionary class]]) {
-        self->prepareData = (NSDictionary *)data;
-    }
-    
-    [self beginToPay];
-}
+
 
 - (void)beginToPay {
     if (self.payType == PayTypeForAlipay) {
         [self doAlipay];
     }else if (self.payType == PayTypeForWXPay) {
         [self doWXPay];
+    }else if (self.payType == PayTypeForUPPay) {
+        [self doUPPay];
     }
 }
 
-- (void)releasePay {
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
-}
 
 
 #pragma mark -===============Alipay===================-
@@ -123,6 +112,7 @@ NSString *kNotification_Alipay_CallBack = @"Notification_Alipay_CallBack";
 }
 
 
+#pragma mark ==========NotificationHandler======================
 - (void)alipayCallBackHandler:(NSNotification *)notif {
     NSDictionary *resultDic = (NSDictionary *)notif.object;
     [self handerAlipayResult:resultDic];
@@ -164,6 +154,52 @@ NSString *kNotification_Alipay_CallBack = @"Notification_Alipay_CallBack";
             [self.delegate paymanager:self payFailure:error];
         }
     }
+    
+}
+
+
+
+- (void)uppayCallBackHandler:(NSNotification *)notif {
+    NSDictionary *resultDic = (NSDictionary *)notif.object;
+    [self handerUPPayResult:resultDic];
+}
+
+- (void)handerUPPayResult:(NSDictionary *)resultDic {
+    NSString *code = [NSString stringWithFormat:@"%@",resultDic[@"code"]];
+//    NSDictionary *data = (NSDictionary *)resultDic[@"data"];
+    
+    NSString *message = @"";
+    if([code isEqualToString:@"success"]) {
+        //结果code为成功时，去商户后台查询一下确保交易是成功的再展示成功
+        //....todo
+        message = @"支付成功";
+        
+        // -- 成功回调
+        if ([self.delegate respondsToSelector:@selector(paymanager:paySuccess:)]) {
+            [self.delegate paymanager:self paySuccess:@{@"memo":message ?: @""}];
+        }
+    }
+    else if([code isEqualToString:@"fail"]) {
+        //交易失败
+        message = @"支付失败";
+        NSError *error = [NSError errorWithDomain:@"" code:200 userInfo:@{@"memo":message ?: @""}];
+        
+        // -- 失败回调
+        if ([self.delegate respondsToSelector:@selector(paymanager:payFailure:)]) {
+            [self.delegate paymanager:self payFailure:error];
+        }
+    }
+    else if([code isEqualToString:@"cancel"]) {
+        //交易取消
+        message = @"支付取消";
+        NSError *error = [NSError errorWithDomain:@"" code:201 userInfo:@{@"memo":message ?: @""}];
+        
+        // -- 失败回调
+        if ([self.delegate respondsToSelector:@selector(paymanager:payFailure:)]) {
+            [self.delegate paymanager:self payFailure:error];
+        }
+    }
+
 }
 
 
@@ -189,6 +225,14 @@ NSString *kNotification_Alipay_CallBack = @"Notification_Alipay_CallBack";
     }];
 }
 
+#pragma mark ==========UPPay======================
+- (void)doUPPay {
+    [[UPPaymentControl defaultControl] startPay:self->prepareData
+                                     fromScheme:[PayConfig config].appScheme
+                                           mode:@"00"
+                                 viewController:self.fromVC];
+}
+
 
 #pragma mark -===============getter===================-
 - (UIViewController *)fromVC {
@@ -197,4 +241,37 @@ NSString *kNotification_Alipay_CallBack = @"Notification_Alipay_CallBack";
     }
     return _fromVC;
 }
+
+
+
+
+
++ (void)parseCallbackUrl:(NSURL *)url {
+    if ([url.host isEqualToString:@"safepay"]) { //跳转支付宝钱包进行支付，处理支付结果
+        [[AlipaySDK defaultService] processOrderWithPaymentResult:url standbyCallback:^(NSDictionary *resultDic) {
+            NSLog(@"result = %@",resultDic);
+            // -- 发送通知
+            [[NSNotificationCenter defaultCenter] postNotificationName:ALIPAY_CALLBACK_NOTIFICATION object:resultDic];
+            
+        }];
+    }else if ([url.host isEqualToString:@"pay"]) { // -- 微信支付
+        [WXApi handleOpenURL:url delegate:[WXPayService sharedInstance]];
+    }else if ([url.absoluteString containsString:@"uppayresult"]) { // -- 银联支付
+        //处理银联的一个bug, 返回的url如下：hwyapp://paydemo://uppayresult?xxxx rey 2019.10.22
+        NSString *absoluteString = url.absoluteString;
+        absoluteString = [absoluteString stringByReplacingOccurrencesOfString:@"paydemo://" withString:@""];
+        [[UPPaymentControl defaultControl] handlePaymentResult:[NSURL URLWithString:absoluteString] completeBlock:^(NSString *code, NSDictionary *data) {
+            // -- 发送通知
+            NSMutableDictionary *resultDic = @{}.mutableCopy;
+            resultDic[@"code"] = code ?: @"";
+            resultDic[@"data"] = data ?: @{};
+            [[NSNotificationCenter defaultCenter] postNotificationName:UPPAY_CALLBACK_NOTIFICATION object:resultDic];
+        }];
+    }
+}
+
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 @end

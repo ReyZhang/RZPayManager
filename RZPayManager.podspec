@@ -1,7 +1,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'RZPayManager'
-  s.version          = '0.1.2'
+  s.version          = '0.1.3'
   s.summary          = 'RZPayManager 是整合了微信，支付宝等第三方支付的支付组件'
 
   s.description      = <<-DESC
@@ -18,8 +18,11 @@ Pod::Spec.new do |s|
   s.pod_target_xcconfig = { 'VALID_ARCHS' => 'x86_64 armv7 armv7s arm64' }
   s.source_files = 'RZPayManager/Classes/**/*'
   s.frameworks = "Foundation", "UIKit"
+  
   s.dependency 'AlipaySDK-iOS', '~> 15.7.4'
+  s.dependency 'WechatOpenSDK', '~> 1.8.7.1'
+
   
   s.static_framework = true
-  s.vendored_libraries = 'RZPayManager/Classes/WeChatSDKFull/*.a'
+  s.vendored_libraries = 'RZPayManager/Classes/UPPay/*.a'
 end

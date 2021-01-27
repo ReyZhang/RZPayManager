@@ -14,7 +14,9 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-UIKIT_EXTERN NSString *kNotification_Alipay_CallBack;
+UIKIT_EXTERN NSString *ALIPAY_CALLBACK_NOTIFICATION;
+UIKIT_EXTERN NSString *UPPAY_CALLBACK_NOTIFICATION;
+
 
 typedef NS_ENUM(NSInteger,PayStatus) {
     PaySuccess,
@@ -50,17 +52,15 @@ typedef NS_ENUM(NSInteger,PayStatus) {
                        delegate:(id<RZPayManagerDelegate>)delegate;
 
 
-/*
- * 开始支付 订单使用
- * 有预支付请求操作
+/*!
+ 发起支付请求
  */
 - (void)startPay;
 
-/** 需要传预支付请求返回数据 */
-- (void)startPayData:(id)result;
-
-- (void)releasePay;
-
+/**
+ 解析支付回调 url
+ */
++ (void)parseCallbackUrl:(NSURL *)url;
 @end
 
 NS_ASSUME_NONNULL_END

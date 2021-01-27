@@ -1,20 +1,20 @@
 # RZPayManager
 
 
-####介绍
+##介绍
 RZPayManager是对时下各第三方支付平台的整合，将支付的调用简单化，组件化。
 目前支持的第三方支付平台有：
 1. 微信支付
 2. 支付宝支付
 
 
-####安装
+##安装
 可以通过cocopods来安装，将如下代码加入到你的Podfile文件中
 ```
 pod 'RZPayManager'
 ```
 
-####使用
+##使用
 
 ```
 //1. 设置URL Scheme，用于支付完成后的回调
@@ -33,7 +33,7 @@ config.appScheme = @"your scheme";
 
 PayConfig类是支付配置类（单例对象），提供支付需要的配置信息
 
-发起支付请求，离不开去业务方获取支付数据。 为了让组件不藕合获取业务数据的请求处理，在设计时使用了面向协议的方式对块进行隔离。
+发起支付请求，离不开去业务方获取支付数据。 为了让组件不藕合获取业务数据的请求处理，在设计时使用了面向协议的方式进行隔离。
 
 PayDataPrepareProtocol 协议
 ```
@@ -51,7 +51,9 @@ PayDataPrepareProtocol 协议
 
 @end
 
+```
 
+```
 @implementation WXPrepareData
 @synthesize requestParams;
 
@@ -113,3 +115,24 @@ self.payManager.requestParams = @{@"orderId":self.model.orderId,@"payAmount":@"0
 RZPayManager对象在使用时，要声明为局部变量或用属性， 不然对象可能会因为被提前释放而接收不到支付回调
 
 
+##处理支付回调
+支付组件在成功或失败后会回调url来返回支付结果， 在AppDelegate的代理方法中拦截并处理
+
+```
+- (BOOL)application:(UIApplication *)application
+            openURL:(NSURL *)url
+  sourceApplication:(NSString *)sourceApplication
+         annotation:(id)annotation {
+    [RZPayManager parseCallbackUrl:url];
+    return YES;
+}
+-(BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<NSString *,id> *)options{
+    [RZPayManager parseCallbackUrl:url];
+    return YES;
+}
+
+- (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url {
+    [RZPayManager parseCallbackUrl:url];
+    return YES;
+}
+```

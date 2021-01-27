@@ -13,8 +13,9 @@
 NS_ASSUME_NONNULL_BEGIN
 
 typedef NS_ENUM(NSInteger,RZPayType) {
-    PayTypeForAlipay,
-    PayTypeForWXPay,
+    PayTypeForAlipay,   //支付宝支付
+    PayTypeForWXPay,    //微信支付
+    PayTypeForUPPay,    //银联支付
 };
 
 typedef void(^RegisterBlock)(PaySDKRegister *platformsRegister);
