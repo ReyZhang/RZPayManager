@@ -1,7 +1,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'RZPayManager'
-  s.version          = '0.1.3'
+  s.version          = '0.1.4'
   s.summary          = 'RZPayManager 是整合了微信，支付宝等第三方支付的支付组件'
 
   s.description      = <<-DESC
@@ -25,4 +25,17 @@ Pod::Spec.new do |s|
   
   s.static_framework = true
   s.vendored_libraries = 'RZPayManager/Classes/UPPay/*.a'
+  
+  s.subspec 'Category' do |category|
+    category.source_files = 'RZPayManager/Classes/Category/**/*'
+  end
+  
+  s.subspec 'Core' do |core|
+    core.source_files = 'RZPayManager/Classes/Core/**/*'
+  end
+  
+  s.subspec 'UPPay' do |uppay|
+    uppay.source_files = 'RZPayManager/Classes/UPPay/**/*'
+  end
+  
 end
