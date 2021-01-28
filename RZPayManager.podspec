@@ -26,17 +26,19 @@ Pod::Spec.new do |s|
   s.static_framework = true
   s.vendored_libraries = 'RZPayManager/Classes/UPPay/*.a'
   
+  
+  ########## subspec
   s.subspec 'Category' do |category|
-    category.source_files = 'RZPayManager/Classes/Category/**/*'
+    category.source_files = 'RZPayManager/Classes/Category/*'
   end
   
   s.subspec 'Core' do |core|
-    core.source_files = 'RZPayManager/Classes/Core/**/*'
-    core.dependency = 'RZPayManager/Category'
+    core.source_files = 'RZPayManager/Classes/Core/*'
+    core.dependency 'RZPayManager/Category'
   end
   
   s.subspec 'UPPay' do |uppay|
-    uppay.source_files = 'RZPayManager/Classes/UPPay/**/*'
+    uppay.source_files = 'RZPayManager/Classes/UPPay/*'
   end
   
 end
