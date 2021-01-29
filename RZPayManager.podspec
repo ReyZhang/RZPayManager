@@ -34,7 +34,9 @@ Pod::Spec.new do |s|
   
   s.subspec 'Core' do |core|
     core.source_files = 'RZPayManager/Classes/Core/*'
+    
     core.dependency 'RZPayManager/Category'
+    core.dependency 'RZPayManager/UPPay'
   end
   
   s.subspec 'UPPay' do |uppay|

@@ -38,10 +38,10 @@
 
 /* Begin PBXFileReference section */
 		01B27BDFCC12B246939F0D69 /* Pods-RZPayManager_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RZPayManager_Example.release.xcconfig"; path = "Target Support Files/Pods-RZPayManager_Example/Pods-RZPayManager_Example.release.xcconfig"; sourceTree = "<group>"; };
-		0A1A47545E32332810211F45 /* RZPayManager.podspec */ = {isa = PBXFileReference; includeInIndex = 1; name = RZPayManager.podspec; path = ../RZPayManager.podspec; sourceTree = "<group>"; };
+		0A1A47545E32332810211F45 /* RZPayManager.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = RZPayManager.podspec; path = ../RZPayManager.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		159D3D50DC6AE82B7D1153F8 /* Pods-RZPayManager_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RZPayManager_Example.debug.xcconfig"; path = "Target Support Files/Pods-RZPayManager_Example/Pods-RZPayManager_Example.debug.xcconfig"; sourceTree = "<group>"; };
-		17E5113A020D9F77BE760C7B /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; name = README.md; path = ../README.md; sourceTree = "<group>"; };
-		39B706A553B5201EC61DC9DF /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
+		17E5113A020D9F77BE760C7B /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
+		39B706A553B5201EC61DC9DF /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		55ED22D45D9E6C8EECCB09A7 /* Pods_RZPayManager_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RZPayManager_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6003F58A195388D20070C39A /* RZPayManager_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RZPayManager_Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6003F58D195388D20070C39A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -193,7 +193,6 @@
 				FCBAD08F0D50496541D51D7A /* Pods-RZPayManager_Tests.debug.xcconfig */,
 				78A938526EE1BA34F94869DC /* Pods-RZPayManager_Tests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -258,6 +257,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 				Base,
 			);
