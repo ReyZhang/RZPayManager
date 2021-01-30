@@ -29,18 +29,21 @@ Pod::Spec.new do |s|
   
   ########## subspec
   s.subspec 'Category' do |category|
-    category.source_files = 'RZPayManager/Classes/Category/*'
+    category.source_files = 'RZPayManager/Classes/Category/**/*'
+    category.frameworks = 'UIKit','Foundation'
   end
   
   s.subspec 'Core' do |core|
-    core.source_files = 'RZPayManager/Classes/Core/*'
-    
+    core.source_files = 'RZPayManager/Classes/Core/**/*'
+    core.frameworks = 'UIKit','Foundation'
+
     core.dependency 'RZPayManager/Category'
     core.dependency 'RZPayManager/UPPay'
   end
-  
+
   s.subspec 'UPPay' do |uppay|
-    uppay.source_files = 'RZPayManager/Classes/UPPay/*'
+    uppay.source_files = 'RZPayManager/Classes/UPPay/*.h'
+    uppay.public_header_files = "RZPayManager/Classes/UPPay/*.h"
   end
   
 end

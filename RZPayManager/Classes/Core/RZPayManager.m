@@ -7,7 +7,7 @@
 
 #import "RZPayManager.h"
 #import "WXPayService.h"
-#import <UPPaymentControl.h>
+
 
 NSString *ALIPAY_CALLBACK_NOTIFICATION = @"Notification_Alipay_CallBack";
 NSString *UPPAY_CALLBACK_NOTIFICATION = @"Notification_UPPay_CallBack";

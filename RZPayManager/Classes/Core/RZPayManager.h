@@ -11,6 +11,7 @@
 #import "UIViewController+Extension.h"
 #import <WXPayService.h>
 #import <AlipaySDK/AlipaySDK.h>
+#import <UPPaymentControl.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
