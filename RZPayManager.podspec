@@ -24,6 +24,8 @@ Pod::Spec.new do |s|
 
   
   s.static_framework = true
+  
+  #如果引入了本地静态库，需要设置静态库的位置
   s.vendored_libraries = 'RZPayManager/Classes/UPPay/*.a'
   
   
@@ -37,13 +39,15 @@ Pod::Spec.new do |s|
     core.source_files = 'RZPayManager/Classes/Core/**/*'
     core.frameworks = 'UIKit','Foundation'
 
+    #subspec 之间的相互依赖
     core.dependency 'RZPayManager/Category'
     core.dependency 'RZPayManager/UPPay'
   end
 
   s.subspec 'UPPay' do |uppay|
+    #如果引入了本地静态库，需要设置静态库的位置
+    uppay.vendored_libraries = 'RZPayManager/Classes/UPPay/*.a'
     uppay.source_files = 'RZPayManager/Classes/UPPay/*.h'
-    uppay.public_header_files = "RZPayManager/Classes/UPPay/*.h"
   end
   
 end
