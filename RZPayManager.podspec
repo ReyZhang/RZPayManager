@@ -1,7 +1,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'RZPayManager'
-  s.version          = '0.1.4'
+  s.version          = '0.1.5'
   s.summary          = 'RZPayManager 是整合了微信，支付宝等第三方支付的支付组件'
 
   s.description      = <<-DESC
@@ -21,7 +21,7 @@ Pod::Spec.new do |s|
   
   s.dependency 'AlipaySDK-iOS', '~> 15.7.4'
   s.dependency 'WechatOpenSDK', '~> 1.8.7.1'
-
+  s.dependency 'MBProgressHUD', '~> 1.2.0'
   
   s.static_framework = true
   
