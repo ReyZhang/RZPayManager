@@ -53,12 +53,9 @@ NSString *UPPAY_CALLBACK_NOTIFICATION = @"Notification_UPPay_CallBack";
         
         //向请求API接口的策略类传递请求参数
         [strategy setValue:self.requestParams forKey:@"requestParams"];
-        
-        [self.fromVC showLoading];
         //准备好请求数据后，开始调用接口API获取所需要的预支付信息
         [strategy getPayData:^(id result, NSError *error ) {
             //拿到需要的预支付信息后，再调起第三方支付组件
-//            [self.fromVC hideHUD];
             if (!error) {
                 id data = result[@"data"];
                 if ([data isKindOfClass:[NSString class]]) {
@@ -74,10 +71,7 @@ NSString *UPPAY_CALLBACK_NOTIFICATION = @"Notification_UPPay_CallBack";
                 }
                 
                 [self beginToPay];
-            }else {
-                [self.fromVC showHint:result[@"message"]];
             }
-            
         }];
     
     }else {
