@@ -39,15 +39,15 @@
          timeStamp = 1590397515;
          */
         PayReq *req = [[PayReq alloc] init];
-        req.partnerId           = prepayData[@"partnerId"];      // -- 商家id
-        req.prepayId            = prepayData[@"prepayId"];
-        req.nonceStr            = prepayData[@"nonceStr"];
-        req.timeStamp           = [prepayData[@"timeStamp"] intValue];
-        req.package             = prepayData[@"packageValue"];
+        req.partnerId           = prepayData[@"partnerid"];      // -- 商家id
+        req.prepayId            = prepayData[@"prepayid"];
+        req.nonceStr            = prepayData[@"noncestr"];
+        req.timeStamp           = [prepayData[@"timestamp"] intValue];
+        req.package             = prepayData[@"package"];
         req.sign                = prepayData[@"sign"];
         
         //日志输出
-        NSLog(@"appid=%@\npartid=%@\nprepayid=%@\nnoncestr=%@\ntimestamp=%ld\npackage=%@\nsign=%@",prepayData[@"appId"],req.partnerId,req.prepayId,req.nonceStr,(long)req.timeStamp,req.package,req.sign);
+        NSLog(@"appid=%@\npartid=%@\nprepayid=%@\nnoncestr=%@\ntimestamp=%ld\npackage=%@\nsign=%@",prepayData[@"appid"],req.partnerId,req.prepayId,req.nonceStr,(long)req.timeStamp,req.package,req.sign);
         
         return req;
     }

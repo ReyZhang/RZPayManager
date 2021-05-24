@@ -57,12 +57,11 @@ NSString *UPPAY_CALLBACK_NOTIFICATION = @"Notification_UPPay_CallBack";
         [strategy getPayData:^(id result, NSError *error ) {
             //拿到需要的预支付信息后，再调起第三方支付组件
             if (!error) {
-                id data = result[@"data"];
-                if ([data isKindOfClass:[NSString class]]) {
+                if ([result isKindOfClass:[NSString class]]) { //如果是字符串的情况 银联取TN，支付宝取url
                     if (self.payType == PayTypeForAlipay ||
                         self.payType == PayTypeForUPPay) {
                         self->prepareData  = [NSString stringWithFormat:@"%@",data];
-                    }else if (self.payType == PayTypeForWXPay){
+                    }else if (self.payType == PayTypeForWXPay){ //微信的话，需要转成字典
                         NSString *jsonStr = [NSString stringWithFormat:@"%@",data];
                         self->prepareData = [jsonStr jsonValueDecoded];
                     }
