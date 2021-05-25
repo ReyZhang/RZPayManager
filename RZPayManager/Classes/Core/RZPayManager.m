@@ -60,16 +60,18 @@ NSString *UPPAY_CALLBACK_NOTIFICATION = @"Notification_UPPay_CallBack";
                 if ([result isKindOfClass:[NSString class]]) { //如果是字符串的情况 银联取TN，支付宝取url
                     if (self.payType == PayTypeForAlipay ||
                         self.payType == PayTypeForUPPay) {
-                        self->prepareData  = [NSString stringWithFormat:@"%@",data];
+                        self->prepareData  = [NSString stringWithFormat:@"%@",result];
                     }else if (self.payType == PayTypeForWXPay){ //微信的话，需要转成字典
-                        NSString *jsonStr = [NSString stringWithFormat:@"%@",data];
+                        NSString *jsonStr = [NSString stringWithFormat:@"%@",result];
                         self->prepareData = [jsonStr jsonValueDecoded];
                     }
-                }else if ([data isKindOfClass:[NSDictionary class]]) {
-                    self->prepareData = (NSDictionary *)data;
+                }else if ([result isKindOfClass:[NSDictionary class]]) {
+                    self->prepareData = (NSDictionary *)result;
                 }
                 
                 [self beginToPay];
+            }else {
+                [self.fromVC showHint:@"获取预支付信息失败"];
             }
         }];
     

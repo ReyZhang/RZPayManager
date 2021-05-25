@@ -248,6 +248,9 @@
 				LastUpgradeCheck = 0720;
 				ORGANIZATIONNAME = "zhanglei5415@163.com";
 				TargetAttributes = {
+					6003F589195388D20070C39A = {
+						DevelopmentTeam = R7THQ5G7MK;
+					};
 					6003F5AD195388D20070C39A = {
 						TestTargetID = 6003F589195388D20070C39A;
 					};
@@ -513,6 +516,7 @@
 			baseConfigurationReference = 159D3D50DC6AE82B7D1153F8 /* Pods-RZPayManager_Example.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = R7THQ5G7MK;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "RZPayManager/RZPayManager-Prefix.pch";
 				INFOPLIST_FILE = "RZPayManager/RZPayManager-Info.plist";
@@ -529,6 +533,7 @@
 			baseConfigurationReference = 01B27BDFCC12B246939F0D69 /* Pods-RZPayManager_Example.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = R7THQ5G7MK;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "RZPayManager/RZPayManager-Prefix.pch";
 				INFOPLIST_FILE = "RZPayManager/RZPayManager-Info.plist";
