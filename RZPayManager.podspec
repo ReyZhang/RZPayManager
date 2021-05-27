@@ -1,7 +1,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'RZPayManager'
-  s.version          = '0.1.8'
+  s.version          = '0.1.9'
   s.summary          = 'RZPayManager 是整合了微信，支付宝等第三方支付的支付组件'
 
   s.description      = <<-DESC

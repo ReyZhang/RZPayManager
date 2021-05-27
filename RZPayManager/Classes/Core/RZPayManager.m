@@ -71,7 +71,9 @@ NSString *UPPAY_CALLBACK_NOTIFICATION = @"Notification_UPPay_CallBack";
                 
                 [self beginToPay];
             }else {
-                [self.fromVC showHint:@"获取预支付信息失败"];
+                if (error.code != 0) {
+                    [self.fromVC showHint:@"获取预支付信息失败"];
+                }
             }
         }];
     

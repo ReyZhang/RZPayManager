@@ -1,24 +1,24 @@
 PODS:
   - AlipaySDK-iOS (15.7.9)
   - MBProgressHUD (1.2.0)
-  - RZPayManager (0.1.6):
+  - RZPayManager (0.1.8):
     - AlipaySDK-iOS (~> 15.7.4)
     - MBProgressHUD (~> 1.2.0)
-    - RZPayManager/Category (= 0.1.6)
-    - RZPayManager/Core (= 0.1.6)
-    - RZPayManager/UPPay (= 0.1.6)
+    - RZPayManager/Category (= 0.1.8)
+    - RZPayManager/Core (= 0.1.8)
+    - RZPayManager/UPPay (= 0.1.8)
     - WechatOpenSDK (~> 1.8.7.1)
-  - RZPayManager/Category (0.1.6):
+  - RZPayManager/Category (0.1.8):
     - AlipaySDK-iOS (~> 15.7.4)
     - MBProgressHUD (~> 1.2.0)
     - WechatOpenSDK (~> 1.8.7.1)
-  - RZPayManager/Core (0.1.6):
+  - RZPayManager/Core (0.1.8):
     - AlipaySDK-iOS (~> 15.7.4)
     - MBProgressHUD (~> 1.2.0)
     - RZPayManager/Category
     - RZPayManager/UPPay
     - WechatOpenSDK (~> 1.8.7.1)
-  - RZPayManager/UPPay (0.1.6):
+  - RZPayManager/UPPay (0.1.8):
     - AlipaySDK-iOS (~> 15.7.4)
     - MBProgressHUD (~> 1.2.0)
     - WechatOpenSDK (~> 1.8.7.1)
@@ -40,7 +40,7 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   AlipaySDK-iOS: 94ff4c0e17c5e7d126b8207596d5033006534c25
   MBProgressHUD: 3ee5efcc380f6a79a7cc9b363dd669c5e1ae7406
-  RZPayManager: e359fccaef6f786a0541e1a8dc08e48685fc155d
+  RZPayManager: ee9b3e1eb3436bfdf5ec944fec77c773e7d13784
   WechatOpenSDK: 6a4d1436c15b3b5fe2a0bd383f3046010186da44
 
 PODFILE CHECKSUM: 51fd787c71ce5265ee8cc7ee59538ed1d53830d7
